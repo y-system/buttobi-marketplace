@@ -1,0 +1,56 @@
+<?php 
+if(isset($_GET['name'])){
+$appname=$_GET['name'];
+exec ("rm -R list/$appname");
+}
+?>
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Buttobi Marketplace β版</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" type="text/css" media="all" href="/media/style.css" />
+  </head>
+  <body>
+    <header>
+      <div>
+        <h1><a href="/index.html">Buttobi Marketplace</a></h1>
+        <section>
+          ぶっとび Firefox OS Apps 向け Marketplace<br>
+          自分で作ったアプリを Firefox OS 端末などにインストールして遊ぼう！
+        </section>
+      </div>
+    </header>
+    <div class="c"></div>
+    <div id="main-content">
+      <section id="first">
+        <h2 onclick="state(1)">① まず、アプリを作ろう！</h2>
+        <article id="a1">ワークショップでアプリの作り方を学ぼう。<br> <a href="/media/apps.zip">アプリのもとをここからダウンロード</a> </article>
+      </section>
+      <section id="fsecond">
+        <h2 onclick="state(2)">② アプリを Buttobi Marketplace に登録！</h2>
+        <article id="a2">アプリを登録する！
+          <form enctype=multipart/form-data method=post action="resister.html">
+            <table>
+              <tbody>
+                <tr><td>ZIP ファイルを選択</td><td><input type="file" name="upfile" required></td></tr>
+                <tr><td colspan="2" id="resist"><button name="resister">アプリを送信</button></td></tr>
+              </tbody>
+            </table>
+          </form>
+        </article>
+      </section>
+      <section id="third">
+        <h2 onclick="state(3)">③ Firefox OS 端末や Android でインストールして遊んでみよう！</h2>
+        <article id="a3">
+          <a href="/apps.html">アプリ一覧を見る</a>
+        </article>
+      </section>
+        <div class="c"></div>
+    </div>
+    <footer>
+      <small>2013年3月17日 ぶっとび Firefox OS Apps</small>
+    </footer>
+  </body>
+</html>

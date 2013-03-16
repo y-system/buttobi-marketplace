@@ -1,0 +1,95 @@
+<?php
+if(isset($_POST['resister'])){
+  if($_FILES['upfile']['error'] == 0){
+  list($up_namae,$up_kakucho)=explode(".",$_FILES['upfile']['name']);
+    if(in_array($up_kakucho, array('zip'))){
+      move_uploaded_file($_FILES['upfile']['tmp_name'], dirname($_SERVER["SCRIPT_FILENAME"])."/list/".$_FILES['upfile']['name']);
+      chmod(dirname($_SERVER["SCRIPT_FILENAME"])."/list/".$_FILES['upfile']['name'], 0777);
+      $name=$_FILES['upfile']['name'];
+    }else{
+      $print="zip のファイル名によりエラーとなりました。".'<br><a href="/index.html">戻る</a>';
+    }
+  }else{
+    $print="アップロードに失敗しました。".'<br><a href="/index.html">戻る</a>';
+  }
+}else{
+  $print="不正な画面遷移です。".'<br><a href="/index.html">戻る</a>';
+}
+if(isset($name)){
+
+$appname=$up_namae;
+$zip=$appname.".zip";
+exec ("cd list;mkdir $appname;chmod -Rf 777 $appname;mv $zip $appname;cd $appname;unzip $zip");
+
+mb_language('Japanese');
+$maddress='http://'.$_SERVER['SERVER_NAME'].'/list/'.$appname.'/manifest.webapp';
+$json = mb_convert_encoding(@file_get_contents($maddress),'UTF-8','auto');
+$pmani=json_decode($json);
+$print="<ul>";
+$ok=0;
+if(isset($pmani->{'name'})){$ok=1;}else{$print=$print."<li>アプリの名前がありません</li>";}
+if(isset($pmani->{'description'})){$ok=$ok+1;}else{$print=$print."<li>アプリの説明がありません。</li>";}
+if(isset($pmani->{'launch_path'})){$ok=$ok+1;}else{$print=$print."<li>launch_pathがありません。</li>";}
+if(isset($pmani->{'icons'}->{'128'})){$ok=$ok+1;}else{$print=$print."<li>アイコン(128)がありません。</li>";}
+if(isset($pmani->{'developer'}->{'name'})){$ok=$ok+1;}else{$print=$print."<li>作者名がありません。</li>";}
+$print=$print."</ul>";
+if($ok==5){
+if($pmani->{'installs_allowed_from'}[0]=="*"){$allow='すべてから許可';}else{$allow='その他';}
+$print='<h2>詳細</h2>
+<table><tbody>
+<tr><td>ファイル名</td><td>'.$zip.'</td></tr>
+<tr><td>アプリの名前</td><td>'.$pmani->{'name'}.' Version '.$pmani->{'version'}.'</td></tr>
+<tr><td>説明</td><td>'.$pmani->{'description'}.'</td></tr>
+<tr><td>アイコン</td><td><img src="'.'http://'.$_SERVER['SERVER_NAME'].'/list/'.$appname.$pmani->{'icons'}->{'128'}.'"></td></tr>
+<tr><td>作者</td><td>'.$pmani->{'developer'}->{'name'}.'</td></tr>
+<tr><td>言語</td><td>';
+if($pmani->{'default_locale'}=='ja'){$print=$print.'日本語';}else{$print=$print.$pmani->{'default_locale'};}
+$print=$print.'</td></tr>
+<tr><td>インストールの可否</td><td>'.$allow.'</td></tr>
+</tbody></table>
+<center><a id="activate" href="activate.html?name='.$appname.'">このアプリを登録する</a> <a id="danger" href="index.html?name='.$appname.'">キャンセル</a></center>';
+}else{
+exec ("rm -Rf list/$appname");
+}
+if($ok==0){
+$print=$print.'アプリではないファイルをアップされた可能性があります。<br>もう一度お確かめください。<br><a href="/index.html">戻る</a>';
+}
+
+}
+  
+?>
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Buttobi Marketplace β版</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" type="text/css" media="all" href="/media/style.css" />
+    <script src="/media/jquery-1.7.2.min.js"></script>
+    <script src="/media/activate.js"></script>
+  </head>
+  <body>
+    <header>
+      <div>
+        <h1><a href="/index.html">Buttobi Marketplace</a></h1>
+        <section>
+          ぶっとび Firefox OS Apps 向け Marketplace<br>
+          自分で作ったアプリを Firefox OS 端末などにインストールして遊ぼう！
+        </section>
+      </div>
+    </header>
+    <div class="c"></div>
+    <div id="main-content">
+      <section id="message">
+        
+<?php
+echo $print;
+?>
+      </section>
+    <div class="c"></div>
+    </div>
+    <footer>
+      <small>2013年3月17日 ぶっとび Firefox OS Apps</small>
+    </footer>
+  </body>
+</html>

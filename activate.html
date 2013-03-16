@@ -1,0 +1,60 @@
+<?php
+if(isset($_GET['name'])){
+$appname=$_GET['name'];
+mb_language('Japanese');
+$maddress='http://'.$_SERVER['SERVER_NAME'].'/list/'.$appname.'/manifest.webapp';
+$json = mb_convert_encoding(@file_get_contents($maddress),'UTF-8','auto');
+$pmani=json_decode($json);
+
+$namae=$pmani->{'name'};
+$sestumei=$pmani->{'description'};
+$aikon=$pmani->{'icons'}->{'128'};
+$sakusya=$pmani->{'developer'}->{'name'};
+$fp = @fopen("times.txt", "r+") or die("Error");
+   $counter = fgets($fp);
+   fclose($fp);
+   $cwrite=$counter+1;
+   $fp = @fopen("times.txt", 'w');
+   rewind($fp);
+   fwrite($fp, $cwrite);
+   fclose($fp);
+      $length=mb_strlen($counter);
+      if($length==1){$counter='00'.$counter;}
+      if($length==2){$counter='0'.$counter; }
+      exec ("mkdir subdomain/$counter;chmod -R 777 subdomain/$counter;cp -R ./list/$appname/* ./subdomain/$counter");
+      exec ("cp ht.txt subdomain/$counter/.htaccess");
+      exec ("rm -Rf list/$appname");
+}
+
+?>
+
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Buttobi Marketplace β版</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" type="text/css" media="all" href="/media/style.css" />
+  </head>
+  <body>
+    <header>
+      <div>
+        <h1><a href="/index.html">Buttobi Marketplace</a></h1>
+        <section>
+          ぶっとび Firefox OS Apps 向け Marketplace<br>
+          自分で作ったアプリを Firefox OS 端末などにインストールして遊ぼう！
+        </section>
+      </div>
+    </header>
+    <div class="c"></div>
+    <div id="main-content">
+      <section id="message">
+        <?php echo 'アプリ'.$namae.'が登録されました。<br><a href="http://'.$counter.'.b.y-misc.org'.$pmani->{'launch_path'}.'">http://'.$counter.'.b.y-misc.org'.$pmani->{'launch_path'}.'</a> よりアクセスしてください。'; ?>
+      </section>
+        <div class="c"></div>
+    </div>
+    <footer>
+      <small>2013年3月17日 ぶっとび Firefox OS Apps</small>
+    </footer>
+  </body>
+</html>

@@ -1,0 +1,8 @@
+#基本設定
+AddType application/x-httpd-php .php .html
+
+Options -Indexes
+# キャッシュの有効期限を明示
+ExpiresActive On
+## 画像、CSS、JavaScript など、デフォルトは 1 年 = 事実上無期限
+ExpiresDefault "access plus 2 seconds"

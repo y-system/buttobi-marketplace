@@ -1,0 +1,66 @@
+<?php 
+$fp = @fopen("times.txt", "r+") or die("Error");
+$counter = fgets($fp);
+fclose($fp);
+$print='';
+for($i=0;$i<$counter;$i++){
+  $length=mb_strlen($i);
+  if($length==1){$c='00'.$i;}
+  if($length==2){$c='0'.$i; }
+  mb_language('Japanese');
+  $maddress='http://'.$c.'.b.y-misc.org/manifest.webapp';
+  $json = mb_convert_encoding(@file_get_contents($maddress),'UTF-8','auto');
+  $pmani=json_decode($json);
+
+  $namae=$pmani->{'name'};
+  $setsumei=$pmani->{'description'};
+  $aikon=$pmani->{'icons'}->{'128'};
+  $sakusya=$pmani->{'developer'}->{'name'};
+  $print=$print.'
+<table>
+<tbody>
+<tr><td rowspan="4"><em class="num">'.$c.'</em><br><img src="http://'.$c.'.b.y-misc.org'.$aikon.'"></td><td colspan="2">'.$namae.' Version '.$pmani->{'version'}.'</td></tr>
+<tr><td colspan="2">'.$setsumei.'</td></tr>
+<tr><td colspan="2">'.$sakusya.'</td></tr>
+<tr><td><a href="http://'.$c.'.b.y-misc.org'.$pmani->{'launch_path'}.'"><img src="http://'.$c.'.b.y-misc.org'.$aikon.'" class="viewimg">アプリを見る</a></td><td><a onclick="install(\'http://'.$c.'.b.y-misc.org/manifest.webapp\');"><img src="/media/apps.png" class="instimg">アプリをインストール</a></td></tr>
+</tbody></table>
+<hr>
+';
+
+}
+?>
+
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Buttobi Marketplace β版</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" type="text/css" media="all" href="/media/style.css" />
+    <script src="media/apps.js"></script>
+  </head>
+  <body>
+    <header>
+      <div>
+        <h1><a href="/index.html">Buttobi Marketplace</a></h1>
+        <section>
+          ぶっとび Firefox OS Apps 向け Marketplace<br>
+          自分で作ったアプリを Firefox OS 端末などにインストールして遊ぼう！
+        </section>
+      </div>
+    </header>
+    <div class="c"></div>
+    <div id="main-content">
+      <section id="message">
+        <?php if($counter==0){echo'アプリは登録されていません。登録してください！<br><a href="/index.html">戻る</a>';} ?>
+<?php
+echo $print;
+?>
+      </section>
+        <div class="c"></div>
+    </div>
+    <footer>
+      <small>2013年3月17日 ぶっとび Firefox OS Apps</small>
+    </footer>
+  </body>
+</html>

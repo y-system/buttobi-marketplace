@@ -1,0 +1,177 @@
+﻿@import url(http://fonts.googleapis.com/css?family=Wendy+One);
+
+body{
+  font-family: "Lucida Grande","Droid Sans","DejaVu Sans","Bitstream Vera Sans","ヒラギノ角ゴ Pro W3","Hiragino Kaku Gothic Pro",メイリオ,Meiryo,Verdana,"ＭＳ Ｐゴシック","MS PGothic","VL Pゴシック","Takao Pゴシック","IPA Pゴシック",sans-serif;
+  width:100%;
+  margin:0px;
+  padding:0px;
+  background:url('/media/fabric_of_squares_gray.png') repeat;
+  color: rgb(72, 72, 72);
+  }
+.c {
+    clear: both;
+}
+#main-content{
+  width:960px;
+  min-height:200px;
+  margin:0px auto 20px;
+  float:none;
+  text-align:left;
+  background:url(/media/buttobi.png) no-repeat;
+  background-position:left center;
+  }
+header{
+  margin:0;
+  padding:0 15px;
+  color:rgb(255,255,255);
+  background: url(/media/header.png) repeat-x 0 0;
+  background-size: 100% 100%;
+  border: none;
+}
+header div{
+  width:960px;
+  margin:0 auto;
+}
+h1{
+  font-family: 'Wendy One', sans-serif;
+  padding:0;
+  margin:15px 15px;
+  float:left;
+  }
+h1 a{
+  text-decoration:none;
+  color:white;
+}
+h1 a:hover{
+  text-decoration:none;
+}
+h2{
+  font-size:18px;
+  margin:4px 0;
+}
+h3{
+  font-size:14px;
+  margin:4px 0;
+}
+#main-content section{
+  border-radius:8px;
+  border: 0.1rem solid rgb(130, 0, 0);
+  background:white;
+  margin:8px auto;
+  padding:5px;
+  width:630px;
+
+  float:right;
+  transition: all 0.25s linear 0s;
+}
+
+input {
+    width: 200px;
+    background: none repeat scroll 0% 0% rgb(230, 235, 254);
+    border: 1px dashed rgb(34, 143, 251);
+}
+#resist{
+  text-align:center;
+}
+footer {
+    margin: 10px auto 0px;
+    background: linear-gradient(to bottom, rgb(255, 255, 255) 0%, rgb(215, 214, 219) 100%) repeat scroll 0% 0% transparent;
+    text-align: right;
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    width:100%;
+}
+#message{
+  min-height:200px;
+  }
+
+#message table{
+    border-spacing: 1 1px;
+    width:100%;
+    border-collapse: collapse;
+    font-size:16px;
+}
+#message table tr{
+    border-bottom: 1px solid rgb(221, 221, 221);
+    border-collapse: collapse;
+}
+#message table tr td{
+    border: 1px solid rgb(221, 221, 221);
+    vertical-align:middle;
+    padding:8px 0;
+    text-align:center;
+}
+hr{
+color:rgb(130,0,0);
+}
+a{
+  text-decoration:none;
+  color:rgb(135, 39, 39);
+}
+a:hover{
+text-decoration:underline;
+}
+.instimg{height:18px;}
+.viewimg{height:18px;}
+ /* ----------------------------------
+ * Buttons
+ * ---------------------------------- */
+
+button::-moz-focus-inner {
+  border: none;
+  outline: none;
+}
+
+a#danger,button,a#activate,input[type="button"] {
+  height:50px;
+  font-size:1.2em;
+  vertical-align: middle;
+  background: #fafafa url(/media/ui/default.png) repeat-x left bottom;
+  border: 0.1rem solid #9f9f9f;
+  border-radius: 0.3rem;
+  font-family: 'Open Sans', Sans-serif;
+  font-weight: 600;
+  line-height: 2;
+  color: #333;
+  text-align: center;
+  text-shadow: 0.1rem 0.1rem 0 rgba(255,255,255,0.3);
+  text-decoration: none;
+  outline: none;
+  padding:5px 50px;
+}
+
+/* Press (default & recommend) */
+button:active,
+a#activate:active,
+input[type="button"]:active,
+button.recommend:active,
+a.recommend[role="button"]:active  {
+  border-color: #008aaa;
+  background: #008aaa;
+  color: #333;
+}
+
+/* Recommend */
+button.recommend,
+a[role="button"].recommend {
+  background-image: url(/media/ui/recommend.png);
+  background-color: #00caf2;
+  border-color: #00acce;
+}
+/* Danger */
+a#danger,button.danger,input.danger,
+a.danger[role="button"] {
+  background-image: url(/media/ui/danger.png);
+  background-color: #b70404;
+  color: #fff;
+  text-shadow: -0.1rem -0.1rem 0 #830b0b;
+  border: none;
+}
+
+/* Danger Press */
+a#danger,button.danger:active,input.danger:active
+a[role="button"].danger:active {
+  background-image: url(/media/ui/danger-press.png);
+  background-color: #890707;
+}
