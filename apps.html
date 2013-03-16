@@ -9,6 +9,7 @@ for($i=0;$i<$counter;$i++){
   if($length==2){$c='0'.$i; }
   mb_language('Japanese');
   $maddress='http://'.$c.'.b.y-misc.org/manifest.webapp';
+  if(@file_get_contents($maddress)){
   $json = mb_convert_encoding(@file_get_contents($maddress),'UTF-8','auto');
   $pmani=json_decode($json);
 
@@ -19,14 +20,16 @@ for($i=0;$i<$counter;$i++){
   $print=$print.'
 <table>
 <tbody>
-<tr><td rowspan="4"><em class="num">'.$c.'</em><br><img src="http://'.$c.'.b.y-misc.org'.$aikon.'"></td><td colspan="2">'.$namae.' Version '.$pmani->{'version'}.'</td></tr>
+<tr><td rowspan="4" class="widimg"><em class="num">'.$c.'</em><br><img src="http://'.$c.'.b.y-misc.org'.$aikon.'"></td><td colspan="2">'.$namae;
+if(isset($pmani->{'version'})){$print=$print.' <small>( Version '.$pmani->{'version'}.' )</small>';}
+$print=$print.'</td></tr>
 <tr><td colspan="2">'.$setsumei.'</td></tr>
 <tr><td colspan="2">'.$sakusya.'</td></tr>
 <tr><td><a href="http://'.$c.'.b.y-misc.org'.$pmani->{'launch_path'}.'"><img src="http://'.$c.'.b.y-misc.org'.$aikon.'" class="viewimg">アプリを見る</a></td><td><a onclick="install(\'http://'.$c.'.b.y-misc.org/manifest.webapp\');"><img src="/media/apps.png" class="instimg">アプリをインストール</a></td></tr>
 </tbody></table>
 <hr>
 ';
-
+}
 }
 ?>
 

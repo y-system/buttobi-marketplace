@@ -117,7 +117,7 @@ text-decoration:underline;
  /* ----------------------------------
  * Buttons
  * ---------------------------------- */
-
+.widimg{width:143px;}
 button::-moz-focus-inner {
   border: none;
   outline: none;

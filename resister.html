@@ -34,18 +34,18 @@ if(isset($pmani->{'icons'}->{'128'})){$ok=$ok+1;}else{$print=$print."<li>アイ�
 if(isset($pmani->{'developer'}->{'name'})){$ok=$ok+1;}else{$print=$print."<li>作者名がありません。</li>";}
 $print=$print."</ul>";
 if($ok==5){
-if($pmani->{'installs_allowed_from'}[0]=="*"){$allow='すべてから許可';}else{$allow='その他';}
 $print='<h2>詳細</h2>
 <table><tbody>
 <tr><td>ファイル名</td><td>'.$zip.'</td></tr>
-<tr><td>アプリの名前</td><td>'.$pmani->{'name'}.' Version '.$pmani->{'version'}.'</td></tr>
+<tr><td>アプリの名前</td><td>'.$pmani->{'name'};
+if(isset($pmani->{'version'})){$print=$print.' Version '.$pmani->{'version'};}
+$print=$print.'</td></tr>
 <tr><td>説明</td><td>'.$pmani->{'description'}.'</td></tr>
 <tr><td>アイコン</td><td><img src="'.'http://'.$_SERVER['SERVER_NAME'].'/list/'.$appname.$pmani->{'icons'}->{'128'}.'"></td></tr>
 <tr><td>作者</td><td>'.$pmani->{'developer'}->{'name'}.'</td></tr>
 <tr><td>言語</td><td>';
 if($pmani->{'default_locale'}=='ja'){$print=$print.'日本語';}else{$print=$print.$pmani->{'default_locale'};}
 $print=$print.'</td></tr>
-<tr><td>インストールの可否</td><td>'.$allow.'</td></tr>
 </tbody></table>
 <center><a id="activate" href="activate.html?name='.$appname.'">このアプリを登録する</a> <a id="danger" href="index.html?name='.$appname.'">キャンセル</a></center>';
 }else{
