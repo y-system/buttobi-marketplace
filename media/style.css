@@ -175,3 +175,28 @@ a[role="button"].danger:active {
   background-image: url(/media/ui/danger-press.png);
   background-color: #890707;
 }
+@media only screen and (max-width:960px){
+  #main-content,header,header div section,header div{
+  width:320px;
+  }
+  #main-content,header{
+    margin-left:auto;
+  margin-right:auto;
+  }
+  h1{
+  float:none;
+  margin:0;
+  }
+  #main-content section{
+  width:318px;
+  float:none;
+
+}
+#main-content{
+  margin:0px auto 50px;
+  padding-top:200px;
+  float:none;
+  background:url(/media/buttobi.png) no-repeat;
+  background-position:center top
+  }
+}

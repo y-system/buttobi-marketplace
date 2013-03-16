@@ -1,8 +1,13 @@
-#Šî–{İ’è
+# html ã‚’php ã§å‡¦ç†ã™ã‚‹
 AddType application/x-httpd-php .php .html
 
 Options -Indexes
-# ƒLƒƒƒbƒVƒ…‚Ì—LŒøŠúŒÀ‚ğ–¾¦
+# ã‚­ãƒ£ãƒƒã‚·ãƒ¥ã®æœ‰åŠ¹æœŸé™
 ExpiresActive On
-## ‰æ‘œACSSAJavaScript ‚È‚ÇAƒfƒtƒHƒ‹ƒg‚Í 1 ”N = –Àã–³ŠúŒÀ
-ExpiresDefault "access plus 2 seconds"
+## ã‚­ãƒ£ãƒƒã‚·ãƒ¥ã•ã›ãªã„
+ExpiresDefault "access plus 1 second"
+# b.ã¯çŸ­ç¸®ç‰ˆãªã®ã§ãƒªãƒ€ã‚¤ãƒ¬ã‚¯ãƒˆ
+RewriteEngine On
+RewriteCond %{HTTP_HOST}                                    ^b.y-misc\.org$
+
+RewriteRule (.*)                                            http://buttobi.y-misc.org/$1 [R=permanent,L]
