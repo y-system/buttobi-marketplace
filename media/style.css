@@ -188,9 +188,11 @@ a[role="button"].danger:active {
   margin:0;
   }
   #main-content section{
-  width:318px;
+  width:308px;
   float:none;
-
+}
+header{
+  padding:0;
 }
 #main-content{
   margin:0px auto 50px;
